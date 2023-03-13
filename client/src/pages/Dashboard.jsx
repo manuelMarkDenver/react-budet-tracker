@@ -23,7 +23,7 @@ export const dashboardAction = async ({ request }) => {
     return toast.success(`Welcome, ${formData.userName}!`);
   } catch (error) {
     console.error(error);
-    throw new Error("There was a problemt creating your account.");
+    throw new Error("There was a problem creating your account.");
   }
 };
 
