@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // library
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 // layouts
@@ -11,7 +11,7 @@ import Main, { mainLoader } from "./layouts/Main";
 import { logoutAction } from "./actions/logout";
 
 // Routes
-import Dashboard, { dashboardLoader } from "./pages/dashboard";
+import Dashboard, { dashboardLoader } from './pages/Dashboard'
 import Error from "./pages/Error";
 
 const router = createBrowserRouter([
