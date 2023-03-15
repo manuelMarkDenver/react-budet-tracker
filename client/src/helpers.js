@@ -1,5 +1,5 @@
 export const waait = () =>
-  new Promise((res) => setTimeout(res, Math.random() * 2000));
+  new Promise((res) => setTimeout(res, Math.random() * 800));
 
 const generateRandomColor = () => {
   const existingBudgetLength = fetchData("budgets")?.length ?? 0;
@@ -59,19 +59,22 @@ export const calculateSpentByBudget = (budgetId) => {
 
     return (acc += expense.amount);
   }, 0);
-  return budgetSpent
+  return budgetSpent;
 };
 
 // FORMATTING
+
+export const formatDateToLocaleString = (epoch) => {
+  return new Date(epoch).toLocaleDateString();
+};
 
 // Formatting percentages
 export const formatPercentage = (amt) => {
   return amt.toLocaleString(undefined, {
     style: "percent",
-    minimumFractionDigits: 0
-  })
-
-}
+    minimumFractionDigits: 0,
+  });
+};
 
 // format currency
 export const formatCurrency = (amount) => {
