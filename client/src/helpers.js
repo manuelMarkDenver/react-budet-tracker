@@ -29,7 +29,54 @@ export const createBudget = ({ name, amount }) => {
   );
 };
 
+export const createExpense = ({ name, amount, budgetId }) => {
+  const newExpense = {
+    id: crypto.randomUUID(),
+    name: name,
+    amount: +amount,
+    createdAt: Date.now(),
+    budgetId: budgetId,
+  };
+
+  const existingExpenses = fetchData("expenses") ?? [];
+
+  return localStorage.setItem(
+    "expenses",
+    JSON.stringify([...existingExpenses, newExpense])
+  );
+};
+
 // delete user
 export const deleteItem = ({ key }) => {
   return localStorage.removeItem(key);
+};
+
+// total spent by budget
+export const calculateSpentByBudget = (budgetId) => {
+  const expenses = fetchData("expenses") ?? [];
+  const budgetSpent = expenses.reduce((acc, expense) => {
+    if (expense.budgetId !== budgetId) return acc;
+
+    return (acc += expense.amount);
+  }, 0);
+  return budgetSpent
+};
+
+// FORMATTING
+
+// Formatting percentages
+export const formatPercentage = (amt) => {
+  return amt.toLocaleString(undefined, {
+    style: "percent",
+    minimumFractionDigits: 0
+  })
+
+}
+
+// format currency
+export const formatCurrency = (amount) => {
+  return amount.toLocaleString(undefined, {
+    style: "currency",
+    currency: "USD",
+  });
 };
